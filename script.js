@@ -31,7 +31,7 @@ async function loadPokeApi() {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`);
     let pokeApi = await response.json();
     allPokemon = pokeApi.results;
-    renderPokeCard(); // Initiales Rendern
+    renderPokeCard(); 
 }
 
 async function renderPokeCard() {
@@ -43,12 +43,12 @@ async function renderPokeCard() {
 
         pokemonCardTemp(i, singlePokemon, pokeTypeOne, pokeTypeTwo);
     }
-    pokemonI += POKEMON_BATCH_SIZE; // Update für das nächste Batch
+    pokemonI += POKEMON_BATCH_SIZE; 
 }
 
 function pokemonCardTemp(index, singlePokemon, pokeTypeOne, pokeTypeTwo) {
     let content = document.getElementById('content');
-    let typeColor = typeColors[pokeTypeOne] || '#f0f0f0'; // Standardfarbe, falls kein Typ übereinstimmt
+    let typeColor = typeColors[pokeTypeOne] || '#f0f0f0'; 
 
     content.innerHTML += /*html*/`
         <div class="singlePokemonCard" style="background-color: ${typeColor}">
@@ -68,12 +68,12 @@ async function singlePokemonData(url) {
     return singlePokemonApi;
 }
 
-// Funktion, um mehr Pokémon zu laden
+
 function loadMorePokemon() {
-    renderPokeCard(); // Lädt die nächsten 25 Pokémon
+    renderPokeCard();
 }
 
-// Suchfunktion
+
 function searchPokemon() {
     let searchQuery = document.getElementById('searchBar').value.toLowerCase();
     let filteredPokemon = allPokemon.filter(pokemon =>
@@ -84,7 +84,7 @@ function searchPokemon() {
 
 async function renderSearchedPokemon(filteredPokemon) {
     let content = document.getElementById('content');
-    content.innerHTML = ""; // Leert vorherige Ergebnisse
+    content.innerHTML = ""; 
 
     for (let pokemon of filteredPokemon) {
         let singlePokemon = await singlePokemonData(pokemon.url);
