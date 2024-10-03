@@ -1,15 +1,38 @@
-#content{
-    display: flex;
+body{
+    background-color: lightblue;
+    margin: 0;
 }
 
-.singlePokemonCard{
-    height: 300px;
-    width: 200px;
-    background-color: lightgray;
-    border-radius: 5px;
-    margin-top: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 8px;
-    padding-right: 8px;
+#head{
+    background-color: rgb(66, 66, 224);
+    display: flex;
+    height: 40px;
+    justify-content: right;
+    align-items: center;
+}
+#searchBar{
+    margin-right: 20px;
+}
+
+#content {
+    display: flex;          
+    flex-wrap: wrap;        
+    justify-content: space-around; 
+    gap: 20px;              
+    padding: 20px;          
+    box-sizing: border-box; 
+}
+.singlePokemonCard {
+    width: 150px;           
+    background-color: #f0f0f0; 
+    padding: 10px;
+    border-radius: 8px;      
+    text-align: center;      
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    box-sizing: border-box;  
+}
+
+.contentSec{
+    display: flex;
+    flex-direction: column;
 }
