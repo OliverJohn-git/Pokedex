@@ -1,0 +1,15 @@
+#content{
+    display: flex;
+}
+
+.singlePokemonCard{
+    height: 300px;
+    width: 200px;
+    background-color: lightgray;
+    border-radius: 5px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
