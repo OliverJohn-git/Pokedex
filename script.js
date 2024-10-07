@@ -94,3 +94,40 @@ async function renderSearchedPokemon(filteredPokemon) {
         pokemonCardTemp(allPokemon.indexOf(pokemon), singlePokemon, pokeTypeOne, pokeTypeTwo);
     }
 }
+
+let currentPokemonIndex = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.singlePokemonCard').forEach((card, index) => {
+        card.addEventListener('click', () => openOverlay(index));
+    });
+});
+
+function openOverlay(index) {
+    currentPokemonIndex = index;
+    loadPokemonDetails(index);
+    document.getElementById('overlay').classList.remove('hidden');
+    document.body.classList.add('no-scroll');
+}
+
+function closeOverlay() {
+    document.getElementById('overlay').classList.add('hidden');
+    document.body.classList.remove('no-scroll');
+}
+
+async function loadPokemonDetails(index) {
+    let pokemon = await singlePokemonData(allPokemon[index].url);
+    let details = `
+        <h1>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
+        <img src="${pokemon.sprites.versions['generation-v']['black-white'].animated.front_default}" alt="${pokemon.name}">
+        <p>HP: ${pokemon.stats[0].base_stat}</p>
+        <p>Angriff: ${pokemon.stats[1].base_stat}</p>
+        <p>Verteidigung: ${pokemon.stats[2].base_stat}</p>
+    `;
+    document.getElementById('pokemonDetails').innerHTML = details;
+}
+
+function navigatePokemon(direction) {
+    currentPokemonIndex = (currentPokemonIndex + direction + allPokemon.length) % allPokemon.length;
+    loadPokemonDetails(currentPokemonIndex);
+}

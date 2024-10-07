@@ -20,9 +20,21 @@
         <button id="loadMoreBtn" onclick="loadMorePokemon()">Mehr Pokémon laden</button>
     </section>
     
-
+    
+    <div id="overlay" class="hidden">
+        <div id="overlayContent">
+            <button id="closeOverlay" onclick="closeOverlay()">X</button>
+            <button id="prevPokemon" onclick="navigatePokemon(-1)">←</button>
+            <div id="pokemonDetails">
+                
+            </div>
+            <button id="nextPokemon" onclick="navigatePokemon(1)">→</button>
+        </div>
+    </div>
+    
     <section id="footer">
         Footer
     </section>
+    
 </body>
 </html>

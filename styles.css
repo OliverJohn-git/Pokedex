@@ -13,7 +13,7 @@ body{
 #searchBar{
     margin-right: 20px;
 }
-
+/* Pokecards style */
 #content {
     display: flex;          
     flex-wrap: wrap;        
@@ -30,9 +30,76 @@ body{
     text-align: center;      
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
     box-sizing: border-box;  
+    filter: drop-shadow(8px 10px 24px #000000);
+}
+
+.singlePokemonCard:hover{
+    cursor: pointer;
 }
 
 .contentSec{
     display: flex;
     flex-direction: column;
+}
+
+/* Overlay-Style */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#overlayContent {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+#prevPokemon, #nextPokemon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+#prevPokemon {
+    left: -50px;
+}
+
+#nextPokemon {
+    right: -50px;
+}
+
+#closeOverlay {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* blocks scrolling */
+body.no-scroll {
+    overflow: hidden;
 }
