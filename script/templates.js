@@ -18,7 +18,7 @@ function pokemonOverlayCard (pokemon, pokeTypeOne){
     let overlayContent = document.getElementById('overlayContent');
     let typeColor = typeColors[pokeTypeOne] || '#f0f0f0';
     
-    overlayContent.innerHTML == /*html*/`
+    overlayContent.innerHTML = /*html*/`
         <div id="pokemonDetails" style="background-color: ${typeColor}">
             <h1>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
             <img src="${pokemon.sprites.versions['generation-v']['black-white'].animated.front_default}" alt="${pokemon.name}">
