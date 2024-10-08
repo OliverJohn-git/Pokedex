@@ -1,20 +1,30 @@
 body{
-    background-color: lightblue;
+    background-color: rgb(30, 30, 177);
     margin: 0;
 }
 
 #head{
-    background-color: rgb(66, 66, 224);
+    background-color: rgb(30, 30, 177);
     display: flex;
     height: 230px;
-    justify-content: left;
+    justify-content: space-around;
     align-items: center;
+    flex-direction: column;
     box-shadow: 5px 5px 15px 5px #000000;
 }
 
 #img{
-    padding-top: 30px;
-    padding-left: 50px;
+    filter: drop-shadow(-14px 21px 10px #000000);
+}
+
+@media (max-width:750px){
+    #img{
+        width: 270px;
+    }
+}
+
+.search{
+    padding-bottom: 15px;
 }
 
 /* Pokecards style */
