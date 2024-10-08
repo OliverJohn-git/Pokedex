@@ -59,6 +59,8 @@ body{
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    width: 300px;
+    background-color: white;
 }
 
 .d_none {
@@ -68,6 +70,7 @@ body{
 body.no-scroll {
     overflow: hidden;
 }
+
 
 #prevPokemon, #nextPokemon {
     position: absolute;

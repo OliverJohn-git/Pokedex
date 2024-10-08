@@ -14,10 +14,10 @@ function pokemonCardTemp(index, singlePokemon, pokeTypeOne, pokeTypeTwo) {
     `;
 }
 
-function pokemonOverlayCard (pokemon, pokeTypeOne){
+function pokemonOverlayCard(pokemon, pokeTypeOne) {
     let overlayContent = document.getElementById('overlayContent');
     let typeColor = typeColors[pokeTypeOne] || '#f0f0f0';
-    
+
     overlayContent.innerHTML = /*html*/`
         <div id="pokemonDetails" style="background-color: ${typeColor}">
             <h1>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
@@ -25,9 +25,8 @@ function pokemonOverlayCard (pokemon, pokeTypeOne){
             <p>HP: ${pokemon.stats[0].base_stat}</p>
             <p>Angriff: ${pokemon.stats[1].base_stat}</p>
             <p>Verteidigung: ${pokemon.stats[2].base_stat}</p>
-            <div><button id="prevPokemon" onclick="navigatePokemon(-1)">←</button></div>
-            <div><button id="nextPokemon" onclick="navigatePokemon(1)">→</button></div>
+            <div><button id="prevPokemon" onclick="navigatePokemon(-1); event.stopPropagation()">←</button></div>
+            <div><button id="nextPokemon" onclick="navigatePokemon(1); event.stopPropagation()">→</button></div>
         </div>
-       
     `;
 }
