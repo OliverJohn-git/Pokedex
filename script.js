@@ -1,28 +1,3 @@
-let allPokemon = [];
-let pokemonI = 0;
-const POKEMON_BATCH_SIZE = 35;
-
-const typeColors = {
-    Grass: '#78C850',
-    Fire: '#F08030',
-    Water: '#6890F0',
-    Bug: '#A8B820',
-    Normal: '#A8A878',
-    Poison: '#A040A0',
-    Electric: '#F8D030',
-    Ground: '#E0C068',
-    Fairy: '#EE99AC',
-    Fighting: '#C03028',
-    Psychic: '#F85888',
-    Rock: '#B8A038',
-    Ghost: '#705898',
-    Ice: '#98D8D8',
-    Dragon: '#7038F8',
-    Dark: '#705848',
-    Steel: '#B8B8D0',
-    Flying: '#A890F0'
-};
-
 function init() {
     loadPokeApi();
 }
@@ -46,33 +21,15 @@ async function renderPokeCard() {
     pokemonI += POKEMON_BATCH_SIZE; 
 }
 
-function pokemonCardTemp(index, singlePokemon, pokeTypeOne, pokeTypeTwo) {
-    let content = document.getElementById('content');
-    let typeColor = typeColors[pokeTypeOne] || '#f0f0f0'; 
-
-    content.innerHTML += /*html*/`
-        <div class="singlePokemonCard" onclick="openOverlay(${index})" style="background-color: ${typeColor}">
-            <h1>${allPokemon[index].name.charAt(0).toUpperCase() + allPokemon[index].name.slice(1)}</h1>
-            <img class="singlePokemonImg" src="${singlePokemon.sprites.front_default}">
-            <div class="pokemonTypes">
-                <div>${pokeTypeOne}</div>
-                ${pokeTypeTwo ? `<div>${pokeTypeTwo}</div>` : ''}
-            </div>
-        </div>
-    `;
-}
-
 async function singlePokemonData(url) {
     let singlePokemonResponse = await fetch(url);
     let singlePokemonApi = await singlePokemonResponse.json();
     return singlePokemonApi;
 }
 
-
 function loadMorePokemon() {
     renderPokeCard();
 }
-
 
 function searchPokemon() {
     let searchQuery = document.getElementById('searchBar').value.toLowerCase();
@@ -93,47 +50,4 @@ async function renderSearchedPokemon(filteredPokemon) {
 
         pokemonCardTemp(allPokemon.indexOf(pokemon), singlePokemon, pokeTypeOne, pokeTypeTwo);
     }
-}
-
-let currentPokemonIndex = 0;
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.singlePokemonCard').forEach((card, index) => {
-        card.addEventListener('click', () => openOverlay(index));
-    });
-});
-
-function openOverlay(index) {
-    currentPokemonIndex = index;
-    loadPokemonDetails(index);
-    document.getElementById('overlay').classList.remove('d_none');
-    document.body.classList.add('no-scroll');
-}
-
-function closeOverlay() {
-    document.getElementById('overlay').classList.add('d_none');
-    document.body.classList.remove('no-scroll');
-}
-
-async function loadPokemonDetails(index, pokeTypeOne) {
-    let pokemon = await singlePokemonData(allPokemon[index].url);
-    let typeColor = typeColors[pokeTypeOne] || '#f0f0f0';
-    let details = /*html*/`
-        <div id="pokemonDetails" style="background-color: ${typeColor}">
-            <h1>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
-            <img src="${pokemon.sprites.versions['generation-v']['black-white'].animated.front_default}" alt="${pokemon.name}">
-            <p>HP: ${pokemon.stats[0].base_stat}</p>
-            <p>Angriff: ${pokemon.stats[1].base_stat}</p>
-            <p>Verteidigung: ${pokemon.stats[2].base_stat}</p>
-            <div><button id="prevPokemon" onclick="navigatePokemon(-1)">←</button></div>
-            <div><button id="nextPokemon" onclick="navigatePokemon(1)">→</button></div>
-        </div>
-       
-    `;
-    document.getElementById('overlayContent').innerHTML = details;
-}
-
-function navigatePokemon(direction) {
-    currentPokemonIndex = (currentPokemonIndex + direction + allPokemon.length) % allPokemon.length;
-    loadPokemonDetails(currentPokemonIndex);
 }
