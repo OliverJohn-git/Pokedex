@@ -6,9 +6,15 @@ body{
 #head{
     background-color: rgb(66, 66, 224);
     display: flex;
-    height: 40px;
-    justify-content: center;
+    height: 230px;
+    justify-content: left;
     align-items: center;
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+
+#img{
+    padding-top: 30px;
+    padding-left: 50px;
 }
 
 /* Pokecards style */
@@ -17,7 +23,7 @@ body{
     flex-wrap: wrap;        
     justify-content: space-around; 
     gap: 20px;              
-    padding: 20px;          
+    padding: 20px;     
     box-sizing: border-box; 
 }
 .singlePokemonCard {
