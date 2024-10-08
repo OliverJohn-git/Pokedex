@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
+    <title>PokeDex</title>
     <script src="script.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="icon/favIcon.png">
 </head>
 <body onload="init()">
     <section id="head">
         <img src="" alt="">
         <div class="search">
-            <input type="text" id="searchBar" placeholder="Suche Pokémon oder Typ" oninput="searchPokemon()">
+            <input type="text" id="searchBar" placeholder="Suche Pokémon" oninput="searchPokemon()">
         </div>
     </section>
 
@@ -21,20 +22,12 @@
     </section>
     
     
-    <div id="overlay" class="hidden">
+    <div id="overlay" onclick="closeOverlay()" class="overlay d_none">
         <div id="overlayContent">
-            <button id="closeOverlay" onclick="closeOverlay()">X</button>
-            <button id="prevPokemon" onclick="navigatePokemon(-1)">←</button>
-            <div id="pokemonDetails">
-                
-            </div>
-            <button id="nextPokemon" onclick="navigatePokemon(1)">→</button>
+            
         </div>
     </div>
-    
-    <section id="footer">
-        Footer
-    </section>
+
     
 </body>
 </html>
