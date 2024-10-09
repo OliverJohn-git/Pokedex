@@ -1,6 +1,6 @@
 let allPokemon = [];
 let pokemonI = 0;
-const POKEMON_BATCH_SIZE = 35;
+const POKEMON_BATCH_SIZE = 20;
 
 const typeColors = {
     Grass: '#78C850',
@@ -25,10 +25,11 @@ const typeColors = {
 
 function init() {
     loadPokeApi();
+    initObserver();
 }
 
 async function loadPokeApi() {
-    let response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=150&offset=0`);
+    let response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=1500&offset=0`);
     let pokeApi = await response.json();
     allPokemon = pokeApi.results;
     renderPokeCard(); 
@@ -43,7 +44,8 @@ async function renderPokeCard() {
 
         pokemonCardTemp(i, singlePokemon, pokeTypeOne, pokeTypeTwo);
     }
-    pokemonI += POKEMON_BATCH_SIZE; 
+    pokemonI += POKEMON_BATCH_SIZE;
+    observeLastPokemon(); 
 }
 
 async function singlePokemonData(url) {
@@ -54,6 +56,7 @@ async function singlePokemonData(url) {
 
 function loadMorePokemon() {
     renderPokeCard();
+    observeLastPokemon();
 }
 
 function searchPokemon() {
@@ -75,4 +78,34 @@ async function renderSearchedPokemon(filteredPokemon) {
 
         pokemonCardTemp(allPokemon.indexOf(pokemon), singlePokemon, pokeTypeOne, pokeTypeTwo);
     }
+}
+
+let observer;
+
+function initObserver() {
+    const options = {
+        root: null, 
+        rootMargin: '0px',
+        threshold: 1.0 
+    };
+
+    observer = new IntersectionObserver(handleIntersect, options);
+    observeLastPokemon();
+}
+
+function observeLastPokemon() {
+    let lastPokemonCard = document.querySelector('.singlePokemonCard:last-child');
+    if (lastPokemonCard) {
+        observer.observe(lastPokemonCard);
+    }
+}
+
+function handleIntersect(entries, observer) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            loadMorePokemon(); 
+            observer.unobserve(entry.target); 
+            setTimeout(observeLastPokemon, 500); 
+        }
+    });
 }
