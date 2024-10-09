@@ -1,6 +1,8 @@
 let allPokemon = [];
 let pokemonI = 0;
 const POKEMON_BATCH_SIZE = 20;
+let observer;
+let isLoading = false;
 
 const typeColors = {
     Grass: '#78C850',
@@ -29,7 +31,7 @@ function init() {
 }
 
 async function loadPokeApi() {
-    let response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=1500&offset=0`);
+    let response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=150&offset=0`);
     let pokeApi = await response.json();
     allPokemon = pokeApi.results;
     renderPokeCard(); 
@@ -45,6 +47,7 @@ async function renderPokeCard() {
         pokemonCardTemp(i, singlePokemon, pokeTypeOne, pokeTypeTwo);
     }
     pokemonI += POKEMON_BATCH_SIZE;
+    isLoading = false;
     observeLastPokemon(); 
 }
 
@@ -55,12 +58,17 @@ async function singlePokemonData(url) {
 }
 
 function loadMorePokemon() {
-    renderPokeCard();
-    observeLastPokemon();
+    if (!isLoading){
+        isLoading = true;
+        renderPokeCard();
+    }
 }
 
 function searchPokemon() {
     let searchQuery = document.getElementById('searchBar').value.toLowerCase();
+    if (searchQuery.length < 3) {
+        return; 
+    }
     let filteredPokemon = allPokemon.filter(pokemon =>
         pokemon.name.includes(searchQuery)
     );
@@ -79,8 +87,6 @@ async function renderSearchedPokemon(filteredPokemon) {
         pokemonCardTemp(allPokemon.indexOf(pokemon), singlePokemon, pokeTypeOne, pokeTypeTwo);
     }
 }
-
-let observer;
 
 function initObserver() {
     const options = {
