@@ -25,6 +25,5 @@ async function loadPokemonDetails(index, pokeTypeOne) {
 
 function navigatePokemon(direction) {
     currentPokemonIndex = (currentPokemonIndex + direction + allPokemon.length) % allPokemon.length;
-    console.log('Navigating to Pokemon index:', currentPokemonIndex);
     loadPokemonDetails(currentPokemonIndex);
 }
